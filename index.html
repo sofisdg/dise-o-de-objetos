@@ -75,3 +75,166 @@
 
         .prod-img {
             width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid #333;
+        }
+
+        .badge-galeria {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .prod-info { flex: 1; }
+        .prod-info h3 { margin: 0 0 5px; font-size: 1.1rem; }
+        .prod-info p { margin: 0; font-size: 0.9rem; color: var(--gris-detalle); }
+
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #modal-img { max-width: 90%; max-height: 80%; border-radius: 5px; }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-btn {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        footer { text-align: center; padding: 60px 20px; }
+
+        @media (max-width: 500px) {
+            .producto-fila { flex-direction: column; text-align: center; }
+            .contenedor-galeria { width: 100%; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-wrapper">
+    <header>
+        <img src="logotipo blanco.png" alt="Soft Estudio" class="logo-img">
+    </header>
+
+    <div class="contenedor">
+        
+        <div class="titulo-seccion">Digital</div>
+        
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="invitacion web-1.jpg" class="prod-img" onclick="abrirGaleria(['invitacion web-1.jpg', 'invitacion web-2.jpg'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Invitaciones Web</h3>
+                <p>Interactivas y personalizadas.</p>
+            </div>
+        </div>
+
+        <div class="titulo-seccion">Cartelería</div>
+        
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="cartel de ingreso-1.jpg" class="prod-img" onclick="abrirGaleria(['cartel de ingreso-1.jpg', 'cartel de ingreso-2.jpg'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Cartel de Ingreso</h3>
+                <p>Bienvenida personalizada para tu evento.</p>
+            </div>
+        </div>
+
+        <div class="titulo-seccion">Detalles y Cotillón</div>
+        
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="removedor es de tragos-1.jpg" class="prod-img" onclick="abrirGaleria(['removedor es de tragos-1.jpg', 'removedor es de tragos-2.jpg', 'removedor es de tragos-3.jpg'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Removedores</h3>
+                <p>Acrílico grabado láser.</p>
+            </div>
+        </div>
+
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="gorras-1.jpeg" class="prod-img" onclick="abrirGaleria(['gorras-1.jpeg', 'gorras-2.jpeg'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Gorras</h3>
+                <p>Premium y personalizadas.</p>
+            </div>
+        </div>
+
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="VASOS.png" class="prod-img" onclick="abrirGaleria(['VASOS.png'])">
+            </div>
+            <div class="prod-info">
+                <h3>Vasos</h3>
+                <p>Modelos varios para tu fiesta.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 SOFT ESTUDIO</p>
+    </footer>
+</div>
+
+<div id="modal-overlay">
+    <span class="close-btn" onclick="cerrarImagen()">&times;</span>
+    <img id="modal-img" src="">
+    <div id="controles-modal">
+        <button class="nav-btn" onclick="cambiarImagen(-1)">Anterior</button>
+        <button class="nav-btn" onclick="cambiarImagen(1)">Siguiente</button>
+    </div>
+</div>
+
+<script>
+    let imagenes = [];
+    let idx = 0;
+
+    function abrirGaleria(lista) {
+        imagenes = lista;
+        idx = 0;
+        document.getElementById('modal-img').src = imagenes[idx];
+        document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('controles-modal').style.display = lista.length > 1 ? 'block' : 'none';
+    }
+
+    function cambiarImagen(n) {
+        idx += n;
+        if (idx >= imagenes.length
