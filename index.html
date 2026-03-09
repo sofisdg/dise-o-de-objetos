@@ -3,182 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soft Estudio | Catálogo</title>
+    <title>Soft Estudio | Eventos con Identidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos base para evitar errores de visualización */
+        :root {
+            --negro: #000000;
+            --gris-oscuro: #111111;
+            --blanco: #ffffff;
+            --divisor: #222222;
+        }
+
         body {
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #000000; /* Fondo negro sólido para evitar errores de degradado */
-            color: #ffffff;
-            font-family: sans-serif;
+            background-color: var(--negro);
+            color: var(--blanco);
         }
 
-        .contenedor {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Tu diseño de fondo original */
+        .site-wrapper {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                        url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
 
-        header { text-align: center; padding: 40px 0; }
-        .logo { max-width: 280px; height: auto; }
+        header { text-align: center; padding: 80px 20px; }
+        .logo-img { max-width: 350px; width: 80%; }
 
-        .seccion {
-            border-bottom: 1px solid #333;
-            margin: 30px 0 15px;
-            padding-bottom: 5px;
+        .contenedor { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        /* TUS SECCIONES */
+        .titulo-seccion {
+            font-size: 1.5rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            margin: 60px 0 20px;
+            border-bottom: 1px solid var(--blanco);
+            padding-bottom: 10px;
         }
 
-        .producto {
+        .producto-fila {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 15px 0;
-            border-bottom: 1px solid #222;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--divisor);
+            gap: 25px;
         }
 
-        .foto-miniatura {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 1px solid #444;
+        .contenedor-galeria {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
         }
 
-        .texto h3 { margin: 0; font-size: 1.1rem; }
-        .texto p { margin: 5px 0 0; color: #888; font-size: 0.9rem; }
-
-        /* EL MODAL (PANTALLA DE AMPLIACIÓN) */
-        /* Importante: display: none para que NO inicie en negro */
-        #visor-galeria {
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
+        .prod-img {
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.98);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        #imagen-ampliada {
-            max-width: 90%;
-            max-height: 70%;
-            object-fit: contain;
+            object-fit: cover;
+            cursor: zoom-in;
+            border-radius: 4px;
             border: 1px solid #333;
         }
 
-        .controles {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
+        .badge-galeria {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
         }
 
-        .boton {
-            background: #ffffff;
-            color: #000000;
+        .prod-info h3 { margin: 0; font-size: 1.2rem; }
+        .prod-info p { margin: 5px 0 0; color: #888; font-weight: 300; }
+
+        /* EL MODAL (Ahora sí corregido para que no inicie en negro) */
+        #modal-visor {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98);
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal-img {
+            max-width: 85%;
+            max-height: 75%;
+            object-fit: contain;
+        }
+
+        .nav-modal {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-nav {
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 25px;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 12px;
         }
 
-        .boton-cerrar {
+        .cerrar-modal {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 35px;
-            color: #fff;
+            top: 25px;
+            right: 35px;
+            font-size: 45px;
+            color: white;
             cursor: pointer;
-            background: none;
-            border: none;
+        }
+
+        footer { text-align: center; padding: 80px 20px; }
+        .btn-contacto {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .wpp { background: #25D366; }
+        .ig { background: #E1306C; }
+
+        @media (max-width: 600px) {
+            .producto-fila { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<div class="contenedor">
+<div class="site-wrapper">
     <header>
-        <img src="logo-blanco.png" alt="Soft Estudio" class="logo">
+        <img src="logo-blanco.png" alt="Soft Estudio" class="logo-img">
     </header>
 
-    <div class="seccion">Digital</div>
-    
-    <div class="producto">
-        <img src="invitacion-web-1.jpg" class="foto-miniatura" onclick="abrir(['invitacion-web-1.jpg', 'invitacion-web-2.jpg'])">
-        <div class="texto">
-            <h3>Invitaciones Web</h3>
-            <p>Interactivas con música y confirmación.</p>
-        </div>
-    </div>
+    <div class="contenedor">
 
-    <div class="seccion">Detalles</div>
-
-    <div class="producto">
-        <img src="removedores de tragos.png" class="foto-miniatura" onclick="abrir(['removedores de tragos.png', 'removedores de tragos-1.png', 'removedores de tragos-2.png'])">
-        <div class="texto">
-            <h3>Removedores</h3>
-            <p>Acrílico personalizado para eventos.</p>
+        <div class="titulo-seccion">Digital</div>
+        
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="invitacion-web-1.jpg" class="prod-img" onclick="abrir(['invitacion-web-1.jpg', 'invitacion-web-2.jpg'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Diseño de invitación web</h3>
+                <p>Interactivas con confirmación, mapas y música.</p>
+            </div>
         </div>
-    </div>
 
-    <div class="producto">
-        <img src="gorras.jpeg" class="foto-miniatura" onclick="abrir(['gorras-1.jpeg', 'gorras-2.jpeg'])">
-        <div class="texto">
-            <h3>Gorras</h3>
-            <p>Cotillón premium personalizado.</p>
+        <div class="titulo-seccion">Detalles</div>
+
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="removedores de tragos.png" class="prod-img" onclick="abrir(['removedores de tragos.png', 'removedores de tragos-1.png', 'removedores de tragos-2.png'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Removedores para tragos</h3>
+                <p>Acrílico personalizado para la barra.</p>
+            </div>
         </div>
-    </div>
+
+        <div class="titulo-seccion">Cotillón Premium</div>
+
+        <div class="producto-fila">
+            <div class="contenedor-galeria">
+                <img src="gorras.jpeg" class="prod-img" onclick="abrir(['gorras-1.jpeg', 'gorras-2.jpeg'])">
+                <div class="badge-galeria">+ Fotos</div>
+            </div>
+            <div class="prod-info">
+                <h3>Gorras personalizadas</h3>
+                <p>Diseños exclusivos para destacar.</p>
+            </div>
+        </div>
+
+        </div>
+
+    <footer>
+        <h2>SOFT ESTUDIO</h2>
+        <div style="margin-top: 30px;">
+            <a href="https://wa.me/3534594320" class="btn-contacto wpp" target="_blank">WhatsApp</a>
+            <a href="https://instagram.com/sof.estudiodg" class="btn-contacto ig" target="_blank">Instagram</a>
+        </div>
+    </footer>
 </div>
 
-<div id="visor-galeria">
-    <button class="boton-cerrar" onclick="cerrar()">&times;</button>
-    
-    <img id="imagen-ampliada" src="">
-
-    <div class="controles" id="barra-botones">
-        <button class="boton" onclick="navegar(-1)">Anterior</button>
-        <button class="boton" onclick="navegar(1)">Siguiente</button>
+<div id="modal-visor">
+    <span class="cerrar-modal" onclick="cerrar()">&times;</span>
+    <img id="modal-img" src="">
+    <div class="nav-modal" id="nav-botones">
+        <button class="btn-nav" onclick="mover(-1)">Anterior</button>
+        <button class="btn-nav" onclick="mover(1)">Siguiente</button>
     </div>
 </div>
 
 <script>
-    let listaFotos = [];
+    let galeria = [];
     let indice = 0;
 
     function abrir(fotos) {
-        listaFotos = fotos;
+        galeria = fotos;
         indice = 0;
-        
-        // Asignar la primera imagen
-        document.getElementById('imagen-ampliada').src = listaFotos[indice];
-        
-        // Mostrar el modal
-        document.getElementById('visor-galeria').style.display = 'flex';
-        
-        // Si solo hay una foto, esconder botones anterior/siguiente
-        document.getElementById('barra-botones').style.display = (fotos.length > 1) ? 'flex' : 'none';
+        document.getElementById('modal-img').src = galeria[indice];
+        document.getElementById('modal-visor').style.display = 'flex';
+        document.getElementById('nav-botones').style.display = (fotos.length > 1) ? 'flex' : 'none';
+        document.body.style.overflow = 'hidden'; 
     }
 
-    function navegar(direccion) {
-        indice += direccion;
-        
-        // Efecto carrusel infinito
-        if (indice >= listaFotos.length) indice = 0;
-        if (indice < 0) indice = listaFotos.length - 1;
-        
-        document.getElementById('imagen-ampliada').src = listaFotos[indice];
+    function mover(dir) {
+        indice += dir;
+        if (indice >= galeria.length) indice = 0;
+        if (indice < 0) indice = galeria.length - 1;
+        document.getElementById('modal-img').src = galeria[indice];
     }
 
     function cerrar() {
-        document.getElementById('visor-galeria').style.display = 'none';
+        document.getElementById('modal-visor').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 </script>
 
