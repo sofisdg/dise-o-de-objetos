@@ -20,7 +20,6 @@
             background-color: var(--negro);
             color: var(--blanco);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .site-wrapper {
@@ -33,7 +32,7 @@
 
         header {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px 40px;
         }
 
         .logo-img {
@@ -49,11 +48,11 @@
         }
 
         .titulo-seccion {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin: 40px 0 15px;
+            margin: 50px 0 20px;
             border-bottom: 1px solid var(--divisor);
             padding-bottom: 10px;
             color: var(--gris-detalle);
@@ -62,214 +61,17 @@
         .producto-fila {
             display: flex;
             align-items: center;
-            padding: 20px 0;
+            padding: 25px 0;
             border-bottom: 1px solid var(--divisor);
             gap: 20px;
         }
 
         .contenedor-galeria {
             position: relative;
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             flex-shrink: 0;
         }
 
         .prod-img {
             width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            object-fit: cover;
-            cursor: pointer;
-            border: 1px solid #333;
-            transition: transform 0.3s ease;
-        }
-
-        .prod-img:hover {
-            transform: scale(1.05);
-        }
-
-        .badge-galeria {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.75);
-            color: white;
-            font-size: 10px;
-            padding: 3px 7px;
-            border-radius: 4px;
-            border: 1px solid #444;
-        }
-
-        .prod-info { flex: 1; }
-        .prod-info h3 { margin: 0 0 5px; font-size: 1.1rem; font-weight: 400; }
-        .prod-info p { margin: 0; font-size: 0.9rem; color: var(--gris-detalle); }
-
-        /* Estilos del Modal */
-        #modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        #modal-img { 
-            max-width: 90%; 
-            max-height: 75%; 
-            border-radius: 4px; 
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 45px;
-            color: white;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .controles-modal {
-            margin-top: 25px;
-            display: flex;
-            gap: 15px;
-        }
-
-        .nav-btn {
-            background: var(--blanco);
-            color: var(--negro);
-            border: none;
-            padding: 10px 25px;
-            cursor: pointer;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            border-radius: 2px;
-        }
-
-        footer { 
-            text-align: center; 
-            padding: 80px 20px; 
-            font-size: 0.8rem; 
-            color: var(--gris-detalle); 
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 550px) {
-            .producto-fila { flex-direction: column; text-align: center; }
-            .contenedor-galeria { width: 100%; height: 250px; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="site-wrapper">
-    <header>
-        <img src="logotipo blanco.png" alt="Soft Estudio" class="logo-img">
-    </header>
-
-    <div class="contenedor">
-        
-        <div class="titulo-seccion">Digital</div>
-        
-        <div class="producto-fila">
-            <div class="contenedor-galeria">
-                <img src="invitacion web-1.jpg" class="prod-img" onclick="abrirGaleria(['invitacion web-1.jpg', 'invitacion web-2.jpg'])">
-                <div class="badge-galeria">+ Fotos</div>
-            </div>
-            <div class="prod-info">
-                <h3>Invitaciones Web</h3>
-                <p>Interactivas y personalizadas.</p>
-            </div>
-        </div>
-
-        <div class="titulo-seccion">Detalles y Cotillón</div>
-        
-        <div class="producto-fila">
-            <div class="contenedor-galeria">
-                <img src="removedor es de tragos-1.jpg" class="prod-img" onclick="abrirGaleria(['removedor es de tragos-1.jpg', 'removedor es de tragos-2.jpg', 'removedor es de tragos-3.jpg'])">
-                <div class="badge-galeria">+ Fotos</div>
-            </div>
-            <div class="prod-info">
-                <h3>Removedores</h3>
-                <p>Acrílico grabado láser.</p>
-            </div>
-        </div>
-
-        <div class="producto-fila">
-            <div class="contenedor-galeria">
-                <img src="gorras-1.jpeg" class="prod-img" onclick="abrirGaleria(['gorras-1.jpeg', 'gorras-2.jpeg'])">
-                <div class="badge-galeria">+ Fotos</div>
-            </div>
-            <div class="prod-info">
-                <h3>Gorras</h3>
-                <p>Premium personalizadas.</p>
-            </div>
-        </div>
-
-        <div class="producto-fila">
-            <div class="contenedor-galeria">
-                <img src="VASOS.png" class="prod-img" onclick="abrirGaleria(['VASOS.png'])">
-            </div>
-            <div class="prod-info">
-                <h3>Vasos</h3>
-                <p>Modelos varios.</p>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>SOFT ESTUDIO — 2026</p>
-    </footer>
-</div>
-
-<div id="modal-overlay">
-    <span class="close-btn" onclick="cerrarImagen()">&times;</span>
-    <img id="modal-img" src="">
-    <div id="modal-controles" class="controles-modal">
-        <button class="nav-btn" onclick="cambiarImagen(-1)">Anterior</button>
-        <button class="nav-btn" onclick="cambiarImagen(1)">Siguiente</button>
-    </div>
-</div>
-
-<script>
-    let imagenes = [];
-    let idx = 0;
-
-    function abrirGaleria(lista) {
-        imagenes = lista;
-        idx = 0;
-        document.getElementById('modal-img').src = imagenes[idx];
-        document.getElementById('modal-overlay').style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Bloquea el scroll de fondo
-        
-        // Solo muestra botones si hay más de una foto
-        document.getElementById('modal-controles').style.display = lista.length > 1 ? 'flex' : 'none';
-    }
-
-    function cambiarImagen(n) {
-        idx += n;
-        if (idx >= imagenes.length) idx = 0;
-        if (idx < 0) idx = imagenes.length - 1;
-        document.getElementById('modal-img').src = imagenes[idx];
-    }
-
-    function cerrarImagen() {
-        document.getElementById('modal-overlay').style.display = 'none';
-        document.body.style.overflow = 'auto'; // Habilita el scroll
-    }
-
-    // Cerrar con la tecla Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === "Escape") cerrarImagen();
-    });
-</script>
-
-</body>
-</html>
